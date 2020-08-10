@@ -1,5 +1,6 @@
 package kr.co.tjoeun.intent_20200806
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         changeNickNameBtn.setOnClickListener {
 
-//  닉네임 변경화면 이동 -> 새 닉네임을 받으러 이동한다고 명시
+//           닉네임 변경화면 이동 -> 새 닉네임을 받으러 이동한다고 명시
             val myIntent = Intent(this, EditNickNameActivity::class.java)
 
 //            단순이동 아니고, .결과를 받으러 이동 -> 어떤 결과를 받으러 가는건지 명시
@@ -44,5 +45,28 @@ class MainActivity : AppCompatActivity() {
            startActivityForResult(myIntent, REQ_FOR_NICKNAME)
         }
 
+    }
+
+//    결과를 받아올때 실행되는 함수 오버라이딩
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+//        requestCode를 우선 검사 =>뭘 가지러 다녀온건지 확인
+//        닉네임을 가지러 다녀온게 맞는지 ? =>  requestCode이 값이 REQ_FOR_NICKNAME인지?
+        if (requestCode == REQ_FOR_NICKNAME){
+
+//            닉네임 변경은 => 확인을 눌렀을때만 하고싶다.
+//            확인이 눌린게 맞는지? => resultCode의 값이 RESULT_OK인지?
+
+            if(resultCode == Activity.RESULT_OK){
+
+//                돌아올때 들고온 새 닉네임을 txt에 반영
+//                data 인텐트가 => resultIntent를 들고 있다. => 거기(data)서  string을 뽑아내자
+                val newNickname = data?.getStringExtra("newNickName")
+
+                nickNameTxt.text = newNickname
+            }
+        }
     }
 }
