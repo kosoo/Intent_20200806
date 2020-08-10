@@ -15,7 +15,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+//카카오톡 플레이스토어로 보내기
+        kakaoPlayStoreBtn.setOnClickListener {
+            val myUri = Uri.parse("market://details?id=com.kakao.talk")
+            val myIntent = Intent(Intent.ACTION_SENDTO, myUri)
+            startActivity(myIntent)
+        }
+//네이버로 링크 보내기
+        naverLinkBtn.setOnClickListener {
+            val myUri = Uri.parse("https://www.naver.com") // 실제 인터넷 주소를 재료로
+            val myIntent = Intent(Intent.ACTION_VIEW, myUri)
+            startActivity(myIntent)
+        }
 
 //        call 버튼 누르면 => CALL 액션 실행되도록
         callBtn.setOnClickListener {
