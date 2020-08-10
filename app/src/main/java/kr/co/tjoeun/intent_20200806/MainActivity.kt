@@ -16,10 +16,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        dialBtn.setOnClickListener {
 
+//        call 버튼 누르면 => CALL 액션 실행되도록
+        callBtn.setOnClickListener {
             val inputPhoneNum = phoneNumEdt.text.toString()
+            val myUri = Uri.parse("tel:${inputPhoneNum}")
+            val myIntent = Intent(Intent.ACTION_CALL, myUri)
+            startActivity(myIntent)
+        }
 
+        dialBtn.setOnClickListener {
+            val inputPhoneNum = phoneNumEdt.text.toString()
 //            어디에 전화를 걸지 uri를 이용해서 정보 저장
             val myUri = Uri.parse("tel:${inputPhoneNum}")
             val myIntent = Intent(Intent.ACTION_DIAL, myUri)
