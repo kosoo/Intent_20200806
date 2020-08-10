@@ -33,6 +33,19 @@ class MainActivity : AppCompatActivity() {
             startActivity(myIntent)
         }
 
+        smsBtn.setOnClickListener {
+            val inputPhoneNum = phoneNumEdt.text.toString()
+//            어디에 전화를 걸지 uri를 이용해서 정보 저장
+            val myUri = Uri.parse("smsto:${inputPhoneNum}")
+            val myIntent = Intent(Intent.ACTION_SENDTO, myUri)
+
+//            문자 전송 화면으로 이동시 => 미리 문구를 적어서 보내자
+//            myIntent를 가지고 갈때 => putExtra로 데이터를 닫아서 보내자
+            myIntent.putExtra("sms_body","이 앱을 **에서 설치해주세요")
+
+            startActivity(myIntent)
+        }
+
         moveToFirstBtn.setOnClickListener {
 //            FirstActivity로 이동하기 => Intent
             val myIntent = Intent(this, FirstActivity::class.java)
